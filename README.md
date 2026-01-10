@@ -8,15 +8,15 @@ Proyek ini dibuat sebagai **Proyek Akhir Mata Kuliah Backend Development** dan s
 
 
 
-## 👥 Anggota Tim & Pembagian Peran
+## Anggota Tim & Pembagian Peran
 
 | No | Nama & NIM | Peran | GitHub |
-|----|------------|-------|--------|
-| 1 | **Anak Agung Made Agung Dananjaya**<br>230030447<br>(Ketua Kelompok) | Inisialisasi proyek, setup FastAPI & database | https://github.com/gungdanan2005-maker |
-| 2 | **Ida Bagus Gde Yoga Pramana**<br>240030457 | Pembuatan model database & schema | https://github.com/Yoga240030457 |
-| 3 | **I Dewa Gede Punia Atmaja**<br>220030750 | Implementasi router & endpoint API | https://github.com/dodepunia2002 |
-| 4 | **I Made Anom Wibawa**<br>240030465 | Dokumentasi sistem & README | https://github.com/AnomWibawa |
-
+|----|-----------|------|--------|
+| 1 | **Anak Agung Made Agung Dananjaya**<br>230030447<br>*(Ketua Kelompok)* | Inisialisasi proyek, setup FastAPI, konfigurasi database, main application | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) |
+| 2 | **Ida Bagus Gde Yoga Pramana**<br>240030457 | Pembuatan model database (SQLAlchemy) dan schema (Pydantic) | [Yoga240030457](https://github.com/Yoga240030457) |
+| 3 | **Zacky Cahya Afrizai**<br>240030268 | Implementasi repository layer (CRUD database) | [ZCASTUDIO](https://github.com/ZCASTUDIO) |
+| 4 | **I Dewa Gede Punia Atmaja**<br>220030750 | Implementasi router & endpoint API | [dodepunia2002](https://github.com/dodepunia2002) |
+| 5 | **I Made Anom Wibawa**<br>240030465 | Dokumentasi sistem & penulisan README | [AnomWibawa](https://github.com/AnomWibawa) |
 
 
 
