@@ -65,7 +65,6 @@ Proyek-Akhir-backend-voting/
 └── README.md
 
 
-
 ## 🔄 Proses Bisnis Sistem
 
 1. Sistem menyimpan dan mengelola data **User**.
