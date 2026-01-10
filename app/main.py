@@ -17,4 +17,4 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message": "API Sistem Voting Online berjalan"}
+    return {"message": "API Sistem Voting Online Berhasil Dijalankan"}
