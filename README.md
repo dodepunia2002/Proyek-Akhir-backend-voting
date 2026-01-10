@@ -1,6 +1,6 @@
-# 🗳️ Proyek Akhir Backend – Sistem Voting Online
+# Proyek Akhir Backend – Sistem Voting Online
 
-## 📌 Deskripsi Proyek
+##  Deskripsi Proyek
 Proyek ini merupakan aplikasi **backend Sistem Voting Online** yang dikembangkan menggunakan **FastAPI**.  
 Aplikasi menyediakan REST API untuk mengelola **User, Candidate, dan Vote** dengan database **SQLite**.
 
@@ -20,7 +20,7 @@ Proyek ini dibuat sebagai **Proyek Akhir Mata Kuliah Backend Development** dan s
 
 
 
-## 🛠️ Lingkungan Pengembangan
+## Lingkungan Pengembangan
 
 - **Bahasa Pemrograman**: Python 3.10+
 - **Framework**: FastAPI
@@ -32,7 +32,7 @@ Proyek ini dibuat sebagai **Proyek Akhir Mata Kuliah Backend Development** dan s
 
 
 
-## 📁 Struktur Folder
+##  Struktur Folder
 
 Struktur folder sesuai dengan repository:
 
@@ -65,7 +65,7 @@ Proyek-Akhir-backend-voting/
 └── README.md
 
 
-## 🔄 Proses Bisnis Sistem
+## Proses Bisnis Sistem
 
 1. Sistem menyimpan dan mengelola data **User**.
 2. Sistem mengelola data **Candidate (kandidat voting)**.
@@ -74,7 +74,7 @@ Proyek-Akhir-backend-voting/
 
 
 
-## 📡 Endpoint API
+## Endpoint API
 
 | Endpoint | Method | Deskripsi |
 |---------|--------|-----------|
@@ -124,7 +124,7 @@ http://127.0.0.1:8000/docs
 
 
 
-🗄️ Database
+ Database
 	•	Jenis Database: SQLite
 	•	Nama File: voting.db
 
