@@ -160,11 +160,3 @@ Endpoint
 GET /users/
 
 
-
-Status Proyek
-
-✔ Backend berjalan dengan baik
-✔ API terdokumentasi dengan Swagger
-✔ Database terintegrasi
-✔ Siap untuk penilaian Proyek Akhir
-
