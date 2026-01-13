@@ -159,4 +159,75 @@ Endpoint
 
 GET /users/
 
+#Response Berhasil (200 OK)
+[
+  {
+    "id": 1,
+    "name": "Dewa"
+  }
+]
 
+4. Pengujian Menambahkan Kandidat
+
+#Endpoint
+POST /candidates/
+
+#Request Body
+{
+  "name": "Kandidat A"
+}
+
+#Response Berhasil (200 OK)
+{
+  "id": 1,
+  "name": "Kandidat A"
+}
+
+5. Pengujian Melihat Daftar Kandidat
+
+#Endpoint
+GET /candidates/
+
+#Response Berhasil (200 OK)
+[
+  {
+    "id": 1,
+    "name": "Kandidat A"
+  }
+]
+
+6. Pengujian Proses Voting
+
+#Endpoint
+POST /votes/
+
+#Request Body
+{
+  "user_id": 1,
+  "candidate_id": 1
+}
+
+#Response Berhasil (200 OK)
+{
+  "message": "Vote berhasil disimpan"
+}
+
+7. Contoh Error (User Tidak Ditemukan)
+
+#Endpoint
+POST /votes/
+
+#Request Body
+{
+  "user_id": 99,
+  "candidate_id": 1
+}
+
+#Response Error (404 Not Found)
+{
+  "detail": "User tidak ditemukan"
+}
+
+
+
+## Hasil Pengujian
