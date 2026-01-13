@@ -1,23 +1,23 @@
 from fastapi import FastAPI
-from app.database.database import engine, Base
+from app.core.database import Base, engine
+from app.models import user, candidate, vote
+from app.routers import user as user_router
+from app.routers import candidate as candidate_router
+from app.routers import vote as vote_router
 
-
-import app.models.user
-import app.models.candidate
-import app.models.vote
-
-from app.routers import user, candidate, vote
-
-app = FastAPI(title="Sistem Voting Online")
+app = FastAPI(
+    title="Sistem Voting Online",
+    version="0.1.0"
+)
 
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
 
-app.include_router(user.router)
-app.include_router(candidate.router)
-app.include_router(vote.router)
-
 @app.get("/")
 def root():
     return {"message": "API berjalan"}
+
+app.include_router(user_router.router, prefix="/users", tags=["Users"])
+app.include_router(candidate_router.router, prefix="/candidates", tags=["Candidates"])
+app.include_router(vote_router.router, prefix="/votes", tags=["Votes"])

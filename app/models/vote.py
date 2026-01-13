@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, ForeignKey
-from app.database.database import Base
+from app.core.database import Base
 
 class Vote(Base):
     __tablename__ = "votes"
