@@ -1,10 +1,11 @@
-# Proyek Akhir Backend – Sistem Voting Online
+# Studi Kasus Sistem Voting Online - Kelompok 2
 
 ##  Deskripsi Proyek
 Proyek ini merupakan aplikasi **backend Sistem Voting Online** yang dikembangkan menggunakan **FastAPI**.  
 Aplikasi menyediakan REST API untuk mengelola **User, Candidate, dan Vote** dengan database **SQLite**.
 
-Proyek ini dibuat sebagai **Proyek Akhir Mata Kuliah Backend Development** dan seluruh implementasi telah disesuaikan dengan struktur serta kode pada repository GitHub.
+Sistem dirancang dengan arsitektur berlapis (Router – Repository – Model – Schema) sehingga mudah dikembangkan dan dipelihara.
+Proyek ini dibuat sebagai Proyek Akhir Mata Kuliah Backend Development dan telah diuji melalui Swagger (OpenAPI).
 
 
 
@@ -59,18 +60,19 @@ Proyek-Akhir-backend-voting/
 │   └── services/
 │       └── .gitkeep
 ├── document/
-│   └── laporan.pdf
+│   └── erd_sistem_voting.png
 ├── voting.db
 ├── requirements.txt
 └── README.md
 
 
-## Proses Bisnis Sistem
+## Proses Sistem
 
 1. Sistem menyimpan dan mengelola data **User**.
 2. Sistem mengelola data **Candidate (kandidat voting)**.
 3. User dapat melakukan **Voting** terhadap kandidat.
 4. Data voting disimpan ke dalam database dan dapat diakses melalui API.
+5.	Data voting disimpan ke dalam database SQLite.
 
 
 
@@ -78,10 +80,12 @@ Proyek-Akhir-backend-voting/
 
 | Endpoint | Method | Deskripsi |
 |---------|--------|-----------|
-| `/` | GET | Root endpoint |
-| `/users/` | GET, POST | Manajemen user |
-| `/candidates/` | GET, POST | Manajemen kandidat |
-| `/votes/` | POST | Proses voting |
+| `/` | GET | Root endpoint untuk mengecek status API |
+| `/users/` | GET | Menampilkan daftar seluruh user |
+| `/users/` | POST | Menambahkan user baru |
+| `/candidates/` | GET | Menampilkan daftar kandidat |
+| `/candidates/` | POST | Menambahkan kandidat baru |
+| `/votes/` | POST | Proses voting oleh user |
 
 
 
@@ -89,39 +93,35 @@ Proyek-Akhir-backend-voting/
 
 Jalankan perintah berikut secara berurutan melalui terminal:
 
-```bash
-# Clone repository
+1.	Clone repository
 git clone https://github.com/dodepunia2002/Proyek-Akhir-backend-voting.git
 cd Proyek-Akhir-backend-voting
 
-# Membuat virtual environment
+2.	Membuat virtual environment
 python3 -m venv venv
 
-# Mengaktifkan virtual environment
+3.	Mengaktifkan virtual environment
 source venv/bin/activate
 
-# Install dependency
+4.	Install dependency
 pip install -r requirements.txt
 
-# Menjalankan server aplikasi
+5.	Menjalankan server
 uvicorn app.main:app --reload
 
-Jika server berhasil dijalankan, aplikasi dapat diakses melalui:
-
+#Jika server berhasil dijalankan, aplikasi dapat diakses melalui:
 http://127.0.0.1:8000
 
 
 
 
- Dokumentasi API (Swagger)
+ ## Dokumentasi API (Swagger)
 
 FastAPI menyediakan dokumentasi API otomatis menggunakan Swagger.
 
 Akses melalui browser:
 
 http://127.0.0.1:8000/docs
-
-
 
 
  Database
@@ -137,26 +137,43 @@ Database akan otomatis digunakan saat aplikasi dijalankan tanpa konfigurasi tamb
 
 
 
-Contoh Pengujian API
+## Contoh Pengujian API
 
- Menambahkan User
+Pengujian API dilakukan menggunakan **Swagger UI (OpenAPI)** yang disediakan oleh FastAPI serta dapat diuji menggunakan tools lain seperti **curl** atau **Postman**.
 
-Endpoint
+1. Pengujian Root Endpoint
 
-POST /users/
+GET /
 
-Request Body
+**Deskripsi**  
+Digunakan untuk memastikan bahwa API berjalan dengan baik.
 
+**Response Berhasil (200 OK)**
+```json
 {
-  "name": "User Contoh"
+  "message": "API berjalan"
 }
 
 
+2.	Pengujian Menambahkan User
 
-Melihat Daftar User
+#Endpoint
+POST /users/
 
-Endpoint
+#Request Body
+{
+  "name": "Dewa"
+}
 
+#Response Berhasil (200 OK)
+{
+  "id": 1,
+  "name": "Dewa"
+}
+
+3. Pengujian Melihat Daftar User
+
+#Endpoint
 GET /users/
 
 #Response Berhasil (200 OK)
@@ -230,4 +247,30 @@ POST /votes/
 
 
 
+
 ## Hasil Pengujian
+
+Berdasarkan pengujian API yang telah dilakukan menggunakan Swagger UI, seluruh endpoint pada Sistem Voting Online dapat berjalan dengan baik.  
+
+Hasil pengujian menunjukkan bahwa:
+- Endpoint **Root (`/`)** berhasil menampilkan status API berjalan.
+- Endpoint **User (`/users/`)** berhasil menambahkan dan menampilkan data user.
+- Endpoint **Candidate (`/candidates/`)** berhasil menambahkan dan menampilkan data kandidat.
+- Endpoint **Vote (`/votes/`)** berhasil menyimpan data voting sesuai dengan relasi user dan kandidat.
+- Sistem berhasil menolak proses voting apabila user atau kandidat tidak ditemukan di database.
+
+Dengan demikian, sistem backend telah memenuhi kebutuhan fungsional dasar dari Sistem Voting Online.
+
+
+
+
+## Kesimpulan
+
+Berdasarkan hasil implementasi dan pengujian yang telah dilakukan, dapat disimpulkan bahwa:
+
+1. Sistem Voting Online berhasil dibangun menggunakan FastAPI dengan arsitektur REST API.
+2. Penggunaan SQLite sebagai database berjalan dengan baik untuk pengelolaan data user, kandidat, dan voting.
+3. Validasi data dan penanganan error telah berjalan sesuai dengan kebutuhan sistem.
+4. Dokumentasi API menggunakan Swagger UI mempermudah proses pengujian dan pengembangan sistem.
+
+Sistem ini dapat dikembangkan lebih lanjut dengan menambahkan fitur autentikasi, otorisasi, dan rekapitulasi hasil voting.

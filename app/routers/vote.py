@@ -1,17 +1,11 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from app.database.database import get_db
 from app.schemas.vote import VoteCreate
-from app.core.database import get_db
-from app.models.vote import Vote
+from app.services.vote_service import create_vote
 
-router = APIRouter()
+router = APIRouter(prefix="/votes", tags=["Votes"])
 
 @router.post("/")
-def vote(data: VoteCreate, db: Session = Depends(get_db)):
-    vote = Vote(
-        user_id=data.user_id,
-        candidate_id=data.candidate_id
-    )
-    db.add(vote)
-    db.commit()
-    return {"message": "Vote berhasil"}
+def vote(vote: VoteCreate, db: Session = Depends(get_db)):
+    return create_vote(db, vote)
