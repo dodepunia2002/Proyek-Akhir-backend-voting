@@ -1,25 +1,25 @@
-# Studi Kasus Sistem Voting Online - Kelompok 2
+# SISTEM VOTING ONLINE - KELOMPOK 2
 
-##  Deskripsi Proyek
-Proyek ini merupakan aplikasi **backend Sistem Voting Online** yang dikembangkan menggunakan **FastAPI**.  
+## Deskripsi Singkat
+Proyek ini merupakan aplikasi **SISTEM Voting Online** yang dikembangkan menggunakan **FastAPI**.  
 Aplikasi menyediakan REST API untuk mengelola **User, Candidate, dan Vote** dengan database **SQLite**.
 
 Sistem dirancang dengan arsitektur berlapis (Router – Repository – Model – Schema) sehingga mudah dikembangkan dan dipelihara.
-Proyek ini dibuat sebagai Proyek Akhir Mata Kuliah Backend Development dan telah diuji melalui Swagger (OpenAPI).
+Proyek ini dibuat sebagai Proyek Akhir Mata Kuliah Backend Development dan telah diuji melalui Swagger UI(OpenAPI).
 
+---
 
+## Daftar Anggota Tim
 
-## Anggota Tim & Pembagian Peran
+| No | Nama | NIM | GitHub | Peran |
+|----|------|-----|--------|------|
+| 1 | Anak Agung Made Agung Dananjaya | 230030447 | gungdanan2005-maker | Inisialisasi proyek, setup FastAPI, konfigurasi database |
+| 2 | Ida Bagus Gde Yoga Pramana | 240030457 | Yoga240030457 | Pembuatan model database dan schema |
+| 3 | Zacky Cahya Afrizai | 240030268 | ZCASTUDIO | Implementasi repository (CRUD database) |
+| 4 | I Dewa Gede Punia Atmaja | 220030750 | dodepunia2002 | Implementasi router dan endpoint API |
+| 5 | I Made Anom Wibawa | 240030465 | AnomWibawa | Dokumentasi sistem dan penulisan README |
 
-| No | Nama & NIM | Peran | GitHub |
-|----|-----------|------|--------|
-| 1 | **Anak Agung Made Agung Dananjaya**<br>230030447<br>*(Ketua Kelompok)* | Inisialisasi proyek, setup FastAPI, konfigurasi database, main application | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) |
-| 2 | **Ida Bagus Gde Yoga Pramana**<br>240030457 | Pembuatan model database (SQLAlchemy) dan schema (Pydantic) | [Yoga240030457](https://github.com/Yoga240030457) |
-| 3 | **Zacky Cahya Afrizai**<br>240030268 | Implementasi repository layer (CRUD database) | [ZCASTUDIO](https://github.com/ZCASTUDIO) |
-| 4 | **I Dewa Gede Punia Atmaja**<br>220030750 | Implementasi router & endpoint API | [dodepunia2002](https://github.com/dodepunia2002) |
-| 5 | **I Made Anom Wibawa**<br>240030465 | Dokumentasi sistem & penulisan README | [AnomWibawa](https://github.com/AnomWibawa) |
-
-
+---
 
 ## Lingkungan Pengembangan
 
@@ -29,13 +29,76 @@ Proyek ini dibuat sebagai Proyek Akhir Mata Kuliah Backend Development dan telah
 - **ORM**: SQLAlchemy
 - **Validasi Data**: Pydantic
 - **Database**: SQLite
-- **Dokumentasi API**: Swagger (OpenAPI)
+- **Dokumentasi API**: Swagger UI & ReDoc
 
+---
 
+## Proses Bisnis Sistem
 
-##  Struktur Folder
+1. Sistem menyimpan dan mengelola data **User**.
+2. Sistem menyimpan dan mengelola data **Candidate (kandidat)**.
+3. User dapat melakukan **voting** terhadap kandidat yang tersedia.
+4. Sistem memvalidasi bahwa user dan kandidat tersedia.
+5. Data voting disimpan ke dalam database.
+6. Hasil voting dapat digunakan untuk proses perhitungan suara.
 
-Struktur folder sesuai dengan repository:
+---
+
+## Entity Relationship Diagram (ERD)
+
+ERD menggambarkan relasi antara tabel **User**, **Candidate**, dan **Vote**.  
+Relasi yang digunakan adalah **One-to-Many**:
+- Satu User dapat melakukan banyak Vote
+- Satu Candidate dapat menerima banyak Vote
+
+![ERD SISTEM VOTING ONLINE](document/erd_sistem_voting_online_kelompok2.png)
+
+---
+
+## Struktur Tabel Database
+
+### Tabel `users`
+| Field | Tipe Data | Keterangan |
+|------|-----------|------------|
+| id | Integer (PK) | ID User |
+| name | String | Nama User |
+
+### Tabel `candidates`
+| Field | Tipe Data | Keterangan |
+|------|-----------|------------|
+| id | Integer (PK) | ID Kandidat |
+| name | String | Nama Kandidat |
+
+### Tabel `votes`
+| Field | Tipe Data | Keterangan |
+|------|-----------|------------|
+| id | Integer (PK) | ID Vote |
+| user_id | Integer (FK) | Relasi ke User |
+| candidate_id | Integer (FK) | Relasi ke Candidate |
+
+---
+
+## Hasil Pengembangan
+
+### Modul User
+- Menambahkan user
+- Menampilkan daftar user
+
+### Modul Candidate
+- Menambahkan kandidat
+- Menampilkan daftar kandidat
+
+### Modul Vote
+- User melakukan voting terhadap kandidat
+- Validasi user dan kandidat sebelum voting
+
+### Dokumentasi API
+- Swagger UI (`/docs`)
+- ReDoc (`/redoc`)
+
+---
+
+## Struktur Folder
 
 Proyek-Akhir-backend-voting/
 ├── app/
@@ -60,217 +123,65 @@ Proyek-Akhir-backend-voting/
 │   └── services/
 │       └── .gitkeep
 ├── document/
+│   ├── laporan.pdf
 │   └── erd_sistem_voting.png
 ├── voting.db
 ├── requirements.txt
 └── README.md
 
+---
 
-## Proses Sistem
+## Cara Instalasi dan Menjalankan Aplikasi
 
-1. Sistem menyimpan dan mengelola data **User**.
-2. Sistem mengelola data **Candidate (kandidat voting)**.
-3. User dapat melakukan **Voting** terhadap kandidat.
-4. Data voting disimpan ke dalam database dan dapat diakses melalui API.
-5.	Data voting disimpan ke dalam database SQLite.
-
-
-
-## Endpoint API
-
-| Endpoint | Method | Deskripsi |
-|---------|--------|-----------|
-| `/` | GET | Root endpoint untuk mengecek status API |
-| `/users/` | GET | Menampilkan daftar seluruh user |
-| `/users/` | POST | Menambahkan user baru |
-| `/candidates/` | GET | Menampilkan daftar kandidat |
-| `/candidates/` | POST | Menambahkan kandidat baru |
-| `/votes/` | POST | Proses voting oleh user |
-
-
-
-## Cara Instalasi & Menjalankan Aplikasi
-
-Jalankan perintah berikut secara berurutan melalui terminal:
-
-1.	Clone repository
+```bash
+# Clone repository
 git clone https://github.com/dodepunia2002/Proyek-Akhir-backend-voting.git
 cd Proyek-Akhir-backend-voting
 
-2.	Membuat virtual environment
+# Membuat virtual environment
 python3 -m venv venv
 
-3.	Mengaktifkan virtual environment
+# Mengaktifkan virtual environment
 source venv/bin/activate
 
-4.	Install dependency
+# Install dependency
 pip install -r requirements.txt
 
-5.	Menjalankan server
+# Menjalankan server aplikasi
 uvicorn app.main:app --reload
 
-#Jika server berhasil dijalankan, aplikasi dapat diakses melalui:
-http://127.0.0.1:8000
+Akses aplikasi melalui browser:
+	•	API Root: http://127.0.0.1:8000
+	•	Swagger UI: http://127.0.0.1:8000/docs
+	•	ReDoc: http://127.0.0.1:8000/redoc
 
+⸻
 
+Contoh Pengujian API
 
+Menambahkan User
 
- ## Dokumentasi API (Swagger)
-
-FastAPI menyediakan dokumentasi API otomatis menggunakan Swagger.
-
-Akses melalui browser:
-
-http://127.0.0.1:8000/docs
-
-
- Database
-	•	Jenis Database: SQLite
-	•	Nama File: voting.db
-
-Database digunakan untuk menyimpan data:
-	•	User
-	•	Candidate
-	•	Vote
-
-Database akan otomatis digunakan saat aplikasi dijalankan tanpa konfigurasi tambahan.
-
-
-
-## Contoh Pengujian API
-
-Pengujian API dilakukan menggunakan **Swagger UI (OpenAPI)** yang disediakan oleh FastAPI serta dapat diuji menggunakan tools lain seperti **curl** atau **Postman**.
-
-1. Pengujian Root Endpoint
-
-GET /
-
-**Deskripsi**  
-Digunakan untuk memastikan bahwa API berjalan dengan baik.
-
-**Response Berhasil (200 OK)**
-```json
-{
-  "message": "API berjalan"
-}
-
-
-2.	Pengujian Menambahkan User
-
-#Endpoint
 POST /users/
 
-#Request Body
 {
-  "name": "Dewa"
+  "name": "User Contoh"
 }
 
-#Response Berhasil (200 OK)
-{
-  "id": 1,
-  "name": "Dewa"
-}
+Menambahkan Candidate
 
-3. Pengujian Melihat Daftar User
-
-#Endpoint
-GET /users/
-
-#Response Berhasil (200 OK)
-[
-  {
-    "id": 1,
-    "name": "Dewa"
-  }
-]
-
-4. Pengujian Menambahkan Kandidat
-
-#Endpoint
 POST /candidates/
 
-#Request Body
 {
-  "name": "Kandidat A"
+  "name": "Candidate Contoh"
 }
 
-#Response Berhasil (200 OK)
-{
-  "id": 1,
-  "name": "Kandidat A"
-}
+Melakukan Voting
 
-5. Pengujian Melihat Daftar Kandidat
-
-#Endpoint
-GET /candidates/
-
-#Response Berhasil (200 OK)
-[
-  {
-    "id": 1,
-    "name": "Kandidat A"
-  }
-]
-
-6. Pengujian Proses Voting
-
-#Endpoint
 POST /votes/
 
-#Request Body
 {
   "user_id": 1,
   "candidate_id": 1
 }
 
-#Response Berhasil (200 OK)
-{
-  "message": "Vote berhasil disimpan"
-}
 
-7. Contoh Error (User Tidak Ditemukan)
-
-#Endpoint
-POST /votes/
-
-#Request Body
-{
-  "user_id": 99,
-  "candidate_id": 1
-}
-
-#Response Error (404 Not Found)
-{
-  "detail": "User tidak ditemukan"
-}
-
-
-
-
-## Hasil Pengujian
-
-Berdasarkan pengujian API yang telah dilakukan menggunakan Swagger UI, seluruh endpoint pada Sistem Voting Online dapat berjalan dengan baik.  
-
-Hasil pengujian menunjukkan bahwa:
-- Endpoint **Root (`/`)** berhasil menampilkan status API berjalan.
-- Endpoint **User (`/users/`)** berhasil menambahkan dan menampilkan data user.
-- Endpoint **Candidate (`/candidates/`)** berhasil menambahkan dan menampilkan data kandidat.
-- Endpoint **Vote (`/votes/`)** berhasil menyimpan data voting sesuai dengan relasi user dan kandidat.
-- Sistem berhasil menolak proses voting apabila user atau kandidat tidak ditemukan di database.
-
-Dengan demikian, sistem backend telah memenuhi kebutuhan fungsional dasar dari Sistem Voting Online.
-
-
-
-
-## Kesimpulan
-
-Berdasarkan hasil implementasi dan pengujian yang telah dilakukan, dapat disimpulkan bahwa:
-
-1. Sistem Voting Online berhasil dibangun menggunakan FastAPI dengan arsitektur REST API.
-2. Penggunaan SQLite sebagai database berjalan dengan baik untuk pengelolaan data user, kandidat, dan voting.
-3. Validasi data dan penanganan error telah berjalan sesuai dengan kebutuhan sistem.
-4. Dokumentasi API menggunakan Swagger UI mempermudah proses pengujian dan pengembangan sistem.
-
-Sistem ini dapat dikembangkan lebih lanjut dengan menambahkan fitur autentikasi, otorisasi, dan rekapitulasi hasil voting.
