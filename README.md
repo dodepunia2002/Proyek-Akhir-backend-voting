@@ -1,7 +1,9 @@
 # SISTEM VOTING ONLINE - KELOMPOK 2
 
 ## Deskripsi Singkat
-Proyek ini merupakan aplikasi **Sistem Voting Online** berbasis web yang terdiri dari Backend (FastAPI) dan Frontend (HTML/CSS/JS Native). Aplikasi ini dirancang untuk memfasilitasi proses pemilihan umum secara digital yang aman, transparan, dan efisien. Sistem menerapkan prinsip **"Satu Pengguna Satu Suara"** dan menggunakan keamanan berbasis token (JWT).
+Proyek ini merupakan aplikasi **Sistem Voting Online** yang dikembangkan sebagai Proyek Akhir Mata Kuliah Backend Development. Aplikasi ini berbasis web (Fullstack) yang terdiri dari Backend API menggunakan **FastAPI** dan Frontend menggunakan **HTML/JS Native**.
+
+Tujuan utama sistem ini adalah memfasilitasi proses pemungutan suara digital yang aman, transparan, dan akurat. Sistem menerapkan validasi ketat di mana setiap pengguna hanya memiliki hak satu suara (*One User One Vote*) dan seluruh data transaksi disimpan dalam database relasional.
 
 ---
 
@@ -19,88 +21,71 @@ Proyek ini merupakan aplikasi **Sistem Voting Online** berbasis web yang terdiri
 
 ## Lingkungan Pengembangan
 
-Alat dan teknologi yang digunakan dalam pengembangan proyek ini:
+Alat dan teknologi yang digunakan dalam pengembangan aplikasi ini meliputi:
 
-* **Sistem Operasi:** macOS / Windows / Linux
-* **Bahasa Pemrograman:** Python 3.11+
+* **Sistem Operasi:** macOS / Windows
+* **Bahasa Pemrograman:** Python 3.11+, JavaScript (ES6)
 * **Framework Backend:** FastAPI
-* **Database:** SQLite (Relational Database)
+* **Web Server:** Uvicorn
+* **Database:** SQLite
 * **ORM:** SQLAlchemy
-* **Frontend:** HTML5, CSS3, Vanilla JavaScript
-* **Authentication:** JWT (JSON Web Token) dengan algoritma HS256 & Bcrypt Hashing
-* **Tools:** Visual Studio Code, SQLite3, Swagger UI, Git & GitHub
+* **Autentikasi:** Python-Jose (JWT), Passlib (Bcrypt)
+* **Frontend:** HTML5, CSS3, Fetch API
+* **IDE:** Visual Studio Code
+* **Version Control:** Git & GitHub
 
 ---
 
 ## Proses Bisnis
 
-Alur kerja aplikasi berjalan sebagai berikut:
-
-1.  **Registrasi Pengguna:** Pengunjung mendaftar akun baru dengan memasukkan username, email, dan password. Password disimpan dalam database dalam bentuk *hash* (terenkripsi).
-2.  **Autentikasi (Login):** Pengguna login menggunakan email dan password. Jika valid, sistem memberikan **Access Token (JWT)**.
-3.  **Melihat Kandidat:** Pengguna yang sudah login dapat melihat daftar kandidat beserta visi-misinya di dashboard.
-4.  **Proses Voting:**
-    * Pengguna memilih salah satu kandidat.
-    * Sistem memvalidasi Token untuk memastikan identitas pengguna.
-    * Sistem mengecek di database apakah pengguna tersebut sudah pernah melakukan voting sebelumnya.
-    * Jika belum, suara disimpan dan status pengguna ditandai sudah memilih. Jika sudah, permintaan ditolak.
-5.  **Melihat Hasil:** Semua pengguna (baik yang sudah memilih atau belum) dapat melihat hasil perolehan suara secara *real-time* dalam bentuk tabel rekapitulasi.
+1.  **Pendaftaran & Login:** Pengguna mendaftar dan login untuk mendapatkan token akses (Session).
+2.  **Manajemen Kandidat:** Admin dapat menambah, mengedit, atau menghapus kandidat.
+3.  **Voting:** Sistem memvalidasi token dan memastikan pengguna belum pernah memilih sebelumnya (*One User One Vote*).
+4.  **Perhitungan Suara:** Sistem menampilkan total suara kandidat secara *real-time*.
 
 ---
 
 ## ERD (Entity Relationship Diagram)
 
-Berikut adalah desain model data yang digunakan. Sistem menggunakan relasi **One-to-Many** antara User/Candidate dengan Vote.
+Model data dirancang menggunakan relasi **One-to-Many**.
+*(Gambar ERD berikut tersimpan dalam file `erd.png` di folder proyek)*
 
-![ERD Sistem Voting Online](document/erd_sistem_voting_online_kelompok2.png)
-
-
+![ERD Sistem Voting](erd.png)
 
 ---
 
-## Struktur/Informasi Detil Tabel Database
+## Tampilan Aplikasi
 
-Database `voting.db` terdiri dari 3 tabel utama:
+### 1. Swagger UI (Dokumentasi API)
+Tampilan interaktif untuk menguji endpoint backend secara langsung.
+![!\[Swagger UI\](swagger.png)](document/swaggerui.png)
 
-### 1. Tabel \`users\`
-Menyimpan data pengguna aplikasi.
-* **id** (Integer, Primary Key): ID unik pengguna.
-* **email** (String, Unique): Alamat email pengguna (digunakan untuk login).
-* **username** (String, Unique): Nama pengguna.
-* **password** (String): Password yang sudah di-hash (bukan plain text).
-* **is_active** (Boolean): Status aktif akun (Default: True).
+### 2. Frontend (Antarmuka Pengguna)
+Tampilan web sederhana untuk user melakukan voting dan melihat hasil.
+![!\[Frontend UI\](frontend.png)](document/frontend.png)
 
-### 2. Tabel \`candidates\`
-Menyimpan data kandidat yang akan dipilih.
-* **id** (Integer, Primary Key): ID unik kandidat.
-* **name** (String): Nama lengkap kandidat.
-* **description** (String): Visi misi atau deskripsi singkat kandidat.
+---
 
-### 3. Tabel \`votes\`
-Menyimpan data transaksi suara (Junction Table).
-* **id** (Integer, Primary Key): ID unik suara.
-* **user_id** (Integer, ForeignKey): Merujuk ke tabel \`users\`. Kolom ini memiliki *Unique Constraint* terhadap user (satu user hanya boleh ada satu kali di tabel ini).
-* **candidate_id** (Integer, ForeignKey): Merujuk ke tabel \`candidates\`.
+## Struktur Tabel Database
+
+### 1. Tabel `users`
+* **id** (PK), **email** (Unique), **username**, **password** (Hash), **is_active**.
+
+### 2. Tabel `candidates`
+* **id** (PK), **name**, **description**.
+
+### 3. Tabel `votes`
+* **id** (PK), **user_id** (FK, Unique Constraint), **candidate_id** (FK).
 
 ---
 
 ## Hasil Pengembangan
 
-Implementasi fitur dibagi menjadi modul-modul berikut:
-
-1.  **Modul Autentikasi (Auth Router):**
-    * Register User baru.
-    * Login & Generate JWT Token.
-2.  **Modul Kandidat (Candidate Router):**
-    * Menampilkan seluruh daftar kandidat (GET).
-    * Menambah kandidat baru (POST).
-3.  **Modul Voting (Vote Router):**
-    * Melakukan voting dengan validasi token & *double-voting check*.
-    * Menghitung rekapitulasi hasil suara (Aggregation).
-4.  **Frontend Interface:**
-    * Halaman Login & Register yang responsif.
-    * Dashboard User untuk melihat kandidat.
-    * Tampilan hasil voting real-time.
+Fitur-fitur utama yang telah berhasil diimplementasikan:
+1.  **Auth:** Register & Login (JWT).
+2.  **Candidates:** Full CRUD (Create, Read, Update, Delete).
+3.  **Votes:** Voting & Result Aggregation.
+4.  **Frontend:** Dashboard Interaktif.
 
 ---
 
@@ -108,63 +93,62 @@ Implementasi fitur dibagi menjadi modul-modul berikut:
 
 ```text
 Proyek-Akhir-backend-voting/
-├── app/                        # Source code Backend
-│   ├── core/                   # Konfigurasi Security & CORS
-│   ├── database/               # Setup koneksi Database
-│   ├── models/                 # Definisi Tabel (SQLAlchemy)
-│   ├── repositories/           # Logika akses data (CRUD)
-│   ├── routers/                # Endpoint API (Controller)
-│   ├── schemas/                # Validasi data (Pydantic)
-│   ├── services/               # Logika bisnis utama
-│   └── main.py                 # Entry point aplikasi
-├── frontend/                   # Source code Frontend
-│   ├── index.html              # Halaman Utama
-│   ├── style.css               # File Styling
-│   └── script.js               # File Logika JavaScript
-├── voting.db                   # File Database SQLite
-├── database_dump.sql           # Backup data SQL
-├── requirements.txt            # Daftar library Python
-└── README.md                   # File dokumentasi ini
-
-```
+│
+├── .gitignore                  # File konfigurasi Git (mengabaikan venv & pycache)
+├── README.md                   # Dokumentasi Lengkap Proyek
+├── requirements.txt            # Daftar library Python (FastAPI, SQLAlchemy, dll)
+├── voting.db                   # File Database SQLite (Berisi data User, Candidate, Vote)
+├── database_dump.sql           # Backup Data SQL (Untuk restore data)
+│
+├── erd.png                     # Gambar ERD (Untuk ditampilkan di README)
+├── swagger.png                 # Screenshot Swagger UI (Untuk README)
+├── frontend.png                # Screenshot Frontend (Untuk README)
+│
+├── frontend/                   # 📁 FOLDER FRONTEND (Tampilan Web)
+│   ├── index.html              # Halaman Utama (HTML)
+│   ├── style.css               # Desain Tampilan (CSS)
+│   └── script.js               # Logika & Koneksi ke API (JavaScript)
+│
+└── app/                        # 📁 FOLDER BACKEND (Logika Utama)
+    ├── __init__.py             # Penanda Package Python
+    ├── main.py                 # Entry Point (File utama untuk menjalankan server)
+    │
+    ├── core/                   # 🔐 Konfigurasi & Keamanan
+    │   ├── __init__.py
+    │   ├── config.py           # Setting Env/Config
+    │   ├── security.py         # Fungsi Hash Password & JWT
+    │   └── deps.py             # Dependency Injection (misal: get_current_user)
+    │
+    ├── database/               # 🗄️ Koneksi Database
+    │   ├── __init__.py
+    │   └── database.py         # Setup SessionLocal & Base Engine
+    │
+    ├── models/                 # 📝 Definisi Tabel Database (SQLAlchemy)
+    │   ├── __init__.py
+    │   ├── user.py             # Tabel Users
+    │   ├── candidate.py        # Tabel Candidates
+    │   └── vote.py             # Tabel Votes
+    │
+    ├── schemas/                # ✅ Validasi Data (Pydantic)
+    │   ├── __init__.py
+    │   ├── user.py             # Schema Input/Output User
+    │   ├── candidate.py        # Schema Input/Output Candidate
+    │   ├── vote.py             # Schema Input/Output Vote
+    │   └── token.py            # Schema
 
 ---
 
 ## Cara Instalasi dan Menjalankan Aplikasi
 
-Ikuti langkah-langkah berikut untuk menjalankan proyek di komputer lokal:
-
-### 1. Persiapan Backend
-
-1. Buka terminal dan masuk ke folder proyek.
-2. Buat Virtual Environment (opsional tapi disarankan):
-```bash
-python3 -m venv venv
-source venv/bin/activate  # (Mac/Linux)
-# atau venv\Scripts\activate (Windows)
-
-
-```
-3. Install library yang dibutuhkan:
-```bash
-pip install -r requirements.txt
-```
-4. Jalankan Server Backend:
-```bash
-uvicorn app.main:app --reload
-```
-*Server akan aktif di https://www.google.com/search?q=http://127.0.0.1:8000*
+### 1. Menjalankan Backend
+`pip install -r requirements.txt`
+`uvicorn app.main:app --reload`
+*Server: http://127.0.0.1:8000*
 
 ### 2. Menjalankan Frontend
+Buka file **`frontend/index.html`** di browser.
 
-1. Pastikan server backend sudah berjalan.
-2. Buka folder **`frontend`**.
-3. Klik dua kali file **`index.html`** untuk membukanya di browser.
-4. Aplikasi siap digunakan (Login, Daftar, Voting).
-
----
-
-
-
-```
+### Akun Demo (Data Dummy)
+* **Password:** `123456`
+* **Email:** `agung@example.com`, `dodepunia@example.com`, dll.
 
