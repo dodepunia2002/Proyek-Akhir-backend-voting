@@ -118,7 +118,7 @@ Proyek-Akhir-backend-voting/
 
 ### 1. Menjalankan Backend
 Buka terminal di folder proyek, lalu jalankan:
-\`\`\`bash
+
 # 1. Install library
 pip install -r requirements.txt
 
