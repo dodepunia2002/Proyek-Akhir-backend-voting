@@ -50,7 +50,7 @@ Alat dan teknologi yang digunakan dalam pengembangan aplikasi ini meliputi:
 Model data dirancang menggunakan relasi **One-to-Many**.
 *(Gambar ERD berikut tersimpan dalam file `erd.png` di folder proyek)*
 
-![ERD Sistem Voting](erd.png)
+![!\[ERD Sistem Voting\](erd.png)](document/erd_sistem_voting_online_kelompok2.png)
 
 ---
 
