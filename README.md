@@ -1,158 +1,120 @@
-# SISTEM VOTING ONLINE - KELOMPOK 2
+# 🗳️ SISTEM VOTING ONLINE - KELOMPOK 2
 
-## Deskripsi Singkat
-Proyek ini merupakan aplikasi **Sistem Voting Online** yang dikembangkan sebagai Proyek Akhir Mata Kuliah Backend Development. Aplikasi ini berbasis web (Fullstack) yang terdiri dari Backend API menggunakan **FastAPI** dan Frontend menggunakan **HTML/JS Native**.
+## 📖 Deskripsi Singkat
+Proyek ini adalah aplikasi **Sistem Voting Online (Fullstack)** yang dibangun untuk memenuhi Tugas Proyek Akhir Mata Kuliah Backend Development. Aplikasi ini menggunakan **FastAPI** (Python) untuk Backend dan **HTML/JS Native** untuk Frontend.
 
-Tujuan utama sistem ini adalah memfasilitasi proses pemungutan suara digital yang aman, transparan, dan akurat. Sistem menerapkan validasi ketat di mana setiap pengguna hanya memiliki hak satu suara (*One User One Vote*) dan seluruh data transaksi disimpan dalam database relasional.
+Sistem ini menjamin keamanan dan keadilan voting dengan prinsip **"Satu Pengguna Satu Suara"** (*One Man One Vote*) menggunakan autentikasi berbasis Token (JWT).
 
 ---
 
-## Daftar Anggota Tim
+## 👥 Daftar Anggota Tim
 
 | No | Nama | NIM | Username GitHub | Peran/Tugas |
-|----|------|-----|-----------------|-------------|
-| 1 | Anak Agung Made Agung Dananjaya | 230030447 | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) | Inisialisasi proyek, setup FastAPI, konfigurasi database |
-| 2 | Ida Bagus Gde Yoga Pramana | 240030457 | [Yoga240030457](https://github.com/Yoga240030457) | Pembuatan model database dan schema |
-| 3 | Zacky Cahya Afrizai | 240030268 | [ZCASTUDIO](https://github.com/ZCASTUDIO) | Implementasi repository (CRUD database) |
-| 4 | I Dewa Gede Punia Atmaja | 220030750 | [dodepunia2002](https://github.com/dodepunia2002) | Implementasi router, endpoint API, & Frontend |
-| 5 | I Made Anom Wibawa | 240030465 | [AnomWibawa](https://github.com/AnomWibawa) | Dokumentasi sistem dan penulisan README |
+|:--:|:-----|:---:|:----------------|:------------|
+| 1 | **Anak Agung Made Agung D.** | 230030447 | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) | 🏗️ Setup Project, FastAPI, & DB Config |
+| 2 | **Ida Bagus Gde Yoga Pramana** | 240030457 | [Yoga240030457](https://github.com/Yoga240030457) | 🗄️ Model Database & Schema |
+| 3 | **Zacky Cahya Afrizai** | 240030268 | [ZCASTUDIO](https://github.com/ZCASTUDIO) | ⚙️ Repository (CRUD Database) |
+| 4 | **I Dewa Gede Punia Atmaja** | 220030750 | [dodepunia2002](https://github.com/dodepunia2002) | 🌐 Router API, Endpoint, & Frontend |
+| 5 | **I Made Anom Wibawa** | 240030465 | [AnomWibawa](https://github.com/AnomWibawa) | 📝 Dokumentasi Sistem & README |
 
 ---
 
-## Lingkungan Pengembangan
+## 🛠️ Lingkungan Pengembangan
 
-Alat dan teknologi yang digunakan dalam pengembangan aplikasi ini meliputi:
-
-* **Sistem Operasi:** macOS / Windows
-* **Bahasa Pemrograman:** Python 3.11+, JavaScript (ES6)
-* **Framework Backend:** FastAPI
-* **Web Server:** Uvicorn
-* **Database:** SQLite
-* **ORM:** SQLAlchemy
-* **Autentikasi:** Python-Jose (JWT), Passlib (Bcrypt)
-* **Frontend:** HTML5, CSS3, Fetch API
-* **IDE:** Visual Studio Code
-* **Version Control:** Git & GitHub
+Teknologi yang digunakan dalam pengembangan:
+* **Backend:** Python 3.11+, FastAPI, Uvicorn, SQLAlchemy.
+* **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API).
+* **Database:** SQLite.
+* **Keamanan:** OAuth2 (JWT Token), Bcrypt Hashing.
+* **Tools:** Visual Studio Code, Git/GitHub, Swagger UI.
 
 ---
 
-## Proses Bisnis
+## 🔄 Proses Bisnis
 
-1.  **Pendaftaran & Login:** Pengguna mendaftar dan login untuk mendapatkan token akses (Session).
-2.  **Manajemen Kandidat:** Admin dapat menambah, mengedit, atau menghapus kandidat.
-3.  **Voting:** Sistem memvalidasi token dan memastikan pengguna belum pernah memilih sebelumnya (*One User One Vote*).
-4.  **Perhitungan Suara:** Sistem menampilkan total suara kandidat secara *real-time*.
-
----
-
-## ERD (Entity Relationship Diagram)
-
-Model data dirancang menggunakan relasi **One-to-Many**.
-*(Gambar ERD berikut tersimpan dalam file `erd.png` di folder proyek)*
-
-![!\[ERD Sistem Voting\](erd.png)](document/erd_sistem_voting_online_kelompok2.png)
+1.  **Registrasi & Login:** User mendaftar dan login untuk mendapatkan Token Akses.
+2.  **Manajemen Kandidat (Admin):**
+    * Menambah, Mengedit, dan Menghapus Kandidat.
+    * Melihat daftar kandidat aktif.
+3.  **Proses Voting:**
+    * Sistem memvalidasi identitas user via Token.
+    * Sistem mengecek apakah user sudah pernah memilih (Cegah *double-vote*).
+    * Jika valid, suara disimpan.
+4.  **Hasil Real-time:** Dashboard menampilkan rekapitulasi suara secara langsung.
 
 ---
 
-## Tampilan Aplikasi
+## 📊 ERD (Entity Relationship Diagram)
 
-### 1. Swagger UI (Dokumentasi API)
-Tampilan interaktif untuk menguji endpoint backend secara langsung.
+Desain database menggunakan relasi *One-to-Many* antara Users/Candidates dengan Votes.
+
+![alt text](document/erd_sistem_voting_online_kelompok2.png)
+
+---
+
+## 📸 Tampilan Aplikasi
+
+Berikut adalah tangkapan layar antarmuka aplikasi yang telah dikembangkan.
+
+### 1. Swagger UI (Dokumentasi API Backend)
+Antarmuka interaktif untuk menguji endpoint API secara langsung.
 ![!\[Swagger UI\](swagger.png)](document/swaggerui.png)
 
-### 2. Frontend (Antarmuka Pengguna)
-Tampilan web sederhana untuk user melakukan voting dan melihat hasil.
+### 2. Frontend (Antarmuka Pengguna Web)
+Halaman dashboard utama di mana pengguna dapat melihat kandidat dan melakukan voting.
 ![!\[Frontend UI\](frontend.png)](document/frontend.png)
 
 ---
 
-## Struktur Tabel Database
+## 🗂️ Struktur Tabel Database
 
-### 1. Tabel `users`
-* **id** (PK), **email** (Unique), **username**, **password** (Hash), **is_active**.
+### 1. Tabel \`users\`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| \`id\` | PK | ID Unik User |
+| \`email\` | String | Email Login (Unique) |
+| \`username\` | String | Nama User |
+| \`password\` | String | Password Hash |
 
-### 2. Tabel `candidates`
-* **id** (PK), **name**, **description**.
+### 2. Tabel \`candidates\`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| \`id\` | PK | ID Unik Kandidat |
+| \`name\` | String | Nama Kandidat |
+| \`description\` | Text | Visi Misi |
 
-### 3. Tabel `votes`
-* **id** (PK), **user_id** (FK, Unique Constraint), **candidate_id** (FK).
+### 3. Tabel \`votes\`
+| Kolom | Tipe | Keterangan |
+|-------|------|------------|
+| \`id\` | PK | ID Transaksi Suara |
+| \`user_id\` | FK | ID Pemilih (Unique Constraint) |
+| \`candidate_id\` | FK | ID Kandidat yang dipilih |
 
 ---
 
-## Hasil Pengembangan
+## 📂 Struktur Folder Proyek
 
-Fitur-fitur utama yang telah berhasil diimplementasikan:
-1.  **Auth:** Register & Login (JWT).
-2.  **Candidates:** Full CRUD (Create, Read, Update, Delete).
-3.  **Votes:** Voting & Result Aggregation.
-4.  **Frontend:** Dashboard Interaktif.
-
----
-
-## Struktur Folder
-
-```text
+\`\`\`text
 Proyek-Akhir-backend-voting/
-│
-├── .gitignore                  # File konfigurasi Git (mengabaikan venv & pycache)
-├── README.md                   # Dokumentasi Lengkap Proyek
-├── requirements.txt            # Daftar library Python (FastAPI, SQLAlchemy, dll)
-├── voting.db                   # File Database SQLite (Berisi data User, Candidate, Vote)
-├── database_dump.sql           # Backup Data SQL (Untuk restore data)
-│
-├── erd.png                     # Gambar ERD (Untuk ditampilkan di README)
-├── swagger.png                 # Screenshot Swagger UI (Untuk README)
-├── frontend.png                # Screenshot Frontend (Untuk README)
-│
-├── frontend/                   #  FOLDER FRONTEND (Tampilan Web)
-│   ├── index.html              # Halaman Utama (HTML)
-│   ├── style.css               # Desain Tampilan (CSS)
-│   └── script.js               # Logika & Koneksi ke API (JavaScript)
-│
-└── app/                        #  FOLDER BACKEND (Logika Utama)
-    ├── __init__.py             # Penanda Package Python
-    ├── main.py                 # Entry Point (File utama untuk menjalankan server)
-    │
-    ├── core/                   #  Konfigurasi & Keamanan
-    │   ├── __init__.py
-    │   ├── config.py           # Setting Env/Config
-    │   ├── security.py         # Fungsi Hash Password & JWT
-    │   └── deps.py             # Dependency Injection (misal: get_current_user)
-    │
-    ├── database/               #  Koneksi Database
-    │   ├── __init__.py
-    │   └── database.py         # Setup SessionLocal & Base Engine
-    │
-    ├── models/                 # Definisi Tabel Database (SQLAlchemy)
-    │   ├── __init__.py
-    │   ├── user.py             # Tabel Users
-    │   ├── candidate.py        # Tabel Candidates
-    │   └── vote.py             # Tabel Votes
-    │
-    ├── schemas/                # Validasi Data (Pydantic)
-    │   ├── __init__.py
-    │   ├── user.py             # Schema Input/Output User
-    │   ├── candidate.py        # Schema Input/Output Candidate
-    │   ├── vote.py             # Schema Input/Output Vote
-    │   └── token.py            # Schema Token JWT
-    │
-    ├── repositories/           #  Logika CRUD Database
-    │   ├── __init__.py
-    │   ├── user_repository.py
-    │   ├── candidate_repository.py
-    │   └── vote_repository.py
-    │
-    └── routers/                # Endpoint API (URL)
-        ├── __init__.py
-        ├── auth.py             # URL Login & Register
-        ├── candidate.py        # URL CRUD Kandidat
-        └── vote.py             # URL Voting & Hasil
-
+├── app/                        # Source Code Backend
+│   ├── main.py                 # Entry Point Aplikasi
+│   ├── ...                     # (routers, models, schemas, dll)
+├── frontend/                   # Source Code Frontend
+│   ├── index.html              # Interface Web
+│   ├── style.css               # Styling
+│   └── script.js               # Logic JavaScript
+├── voting.db                   # File Database SQLite
+├── database_dump.sql           # Backup Data SQL
+├── erd.png                     # Gambar ERD
+├── swagger.png                 # Screenshot Swagger UI
+├── frontend.png                # Screenshot Frontend UI
+├── requirements.txt            # Library Python
+└── README.md                   # Dokumentasi
+\`\`\`
 
 ---
 
-
-##  Cara Instalasi dan Menjalankan
+## 🚀 Cara Instalasi dan Menjalankan
 
 ### 1. Menjalankan Backend
 Buka terminal di folder proyek, lalu jalankan:
@@ -171,11 +133,11 @@ uvicorn app.main:app --reload
 
 ---
 
-##  Akun Demo (Data Dummy)
+## 🧪 Akun Demo (Data Dummy)
 
 Gunakan akun berikut untuk mencoba aplikasi (semua password sama).
 
- **Password:** \`123456\`
+🔑 **Password:** \`123456\`
 
 | Pemilik Akun | Email Login |
 |--------------|-------------|
@@ -186,3 +148,4 @@ Gunakan akun berikut untuk mencoba aplikasi (semua password sama).
 | Anom W. | \`anom@example.com\` |
 
 ---
+
