@@ -104,51 +104,85 @@ Proyek-Akhir-backend-voting/
 ├── swagger.png                 # Screenshot Swagger UI (Untuk README)
 ├── frontend.png                # Screenshot Frontend (Untuk README)
 │
-├── frontend/                   # 📁 FOLDER FRONTEND (Tampilan Web)
+├── frontend/                   #  FOLDER FRONTEND (Tampilan Web)
 │   ├── index.html              # Halaman Utama (HTML)
 │   ├── style.css               # Desain Tampilan (CSS)
 │   └── script.js               # Logika & Koneksi ke API (JavaScript)
 │
-└── app/                        # 📁 FOLDER BACKEND (Logika Utama)
+└── app/                        #  FOLDER BACKEND (Logika Utama)
     ├── __init__.py             # Penanda Package Python
     ├── main.py                 # Entry Point (File utama untuk menjalankan server)
     │
-    ├── core/                   # 🔐 Konfigurasi & Keamanan
+    ├── core/                   #  Konfigurasi & Keamanan
     │   ├── __init__.py
     │   ├── config.py           # Setting Env/Config
     │   ├── security.py         # Fungsi Hash Password & JWT
     │   └── deps.py             # Dependency Injection (misal: get_current_user)
     │
-    ├── database/               # 🗄️ Koneksi Database
+    ├── database/               #  Koneksi Database
     │   ├── __init__.py
     │   └── database.py         # Setup SessionLocal & Base Engine
     │
-    ├── models/                 # 📝 Definisi Tabel Database (SQLAlchemy)
+    ├── models/                 # Definisi Tabel Database (SQLAlchemy)
     │   ├── __init__.py
     │   ├── user.py             # Tabel Users
     │   ├── candidate.py        # Tabel Candidates
     │   └── vote.py             # Tabel Votes
     │
-    ├── schemas/                # ✅ Validasi Data (Pydantic)
+    ├── schemas/                # Validasi Data (Pydantic)
     │   ├── __init__.py
     │   ├── user.py             # Schema Input/Output User
     │   ├── candidate.py        # Schema Input/Output Candidate
     │   ├── vote.py             # Schema Input/Output Vote
-    │   └── token.py            # Schema
+    │   └── token.py            # Schema Token JWT
+    │
+    ├── repositories/           #  Logika CRUD Database
+    │   ├── __init__.py
+    │   ├── user_repository.py
+    │   ├── candidate_repository.py
+    │   └── vote_repository.py
+    │
+    └── routers/                # Endpoint API (URL)
+        ├── __init__.py
+        ├── auth.py             # URL Login & Register
+        ├── candidate.py        # URL CRUD Kandidat
+        └── vote.py             # URL Voting & Hasil
+
 
 ---
 
-## Cara Instalasi dan Menjalankan Aplikasi
+
+##  Cara Instalasi dan Menjalankan
 
 ### 1. Menjalankan Backend
-`pip install -r requirements.txt`
-`uvicorn app.main:app --reload`
-*Server: http://127.0.0.1:8000*
+Buka terminal di folder proyek, lalu jalankan:
+\`\`\`bash
+# 1. Install library
+pip install -r requirements.txt
+
+# 2. Jalankan Server
+uvicorn app.main:app --reload
+\`\`\`
+*Server akan berjalan di: http://127.0.0.1:8000*
 
 ### 2. Menjalankan Frontend
-Buka file **`frontend/index.html`** di browser.
+* Buka folder **\`frontend/\`**.
+* Klik dua kali file **\`index.html\`** (atau *drag & drop* ke browser).
 
-### Akun Demo (Data Dummy)
-* **Password:** `123456`
-* **Email:** `agung@example.com`, `dodepunia@example.com`, dll.
+---
 
+##  Akun Demo (Data Dummy)
+
+Gunakan akun berikut untuk mencoba aplikasi (semua password sama).
+
+ **Password:** \`123456\`
+
+| Pemilik Akun | Email Login |
+|--------------|-------------|
+| Agung D. | \`agung@example.com\` |
+| Yoga P. | \`yoga@example.com\` |
+| Zacky C. | \`zacky@example.com\` |
+| Dode Punia | \`dodepunia@example.com\` |
+| Anom W. | \`anom@example.com\` |
+
+---
