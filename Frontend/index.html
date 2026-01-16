@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Voting Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" id="app">
+        <h1>🗳️ E-Voting</h1>
+        <div id="message-box"></div>
+
+        <div id="login-section">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="user@example.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="******">
+            </div>
+            <button onclick="handleLogin()">Masuk</button>
+            <button class="secondary" onclick="showSection('register-section')">Daftar Akun Baru</button>
+        </div>
+
+        <div id="register-section" class="hidden">
+            <h2>Daftar</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="reg-username">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reg-email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="reg-password">
+            </div>
+            <button onclick="handleRegister()">Daftar</button>
+            <button class="secondary" onclick="showSection('login-section')">Kembali ke Login</button>
+        </div>
+
+        <div id="dashboard-section" class="hidden">
+            <div class="nav-links">
+                <a onclick="loadCandidates()">Vote & Kandidat</a>
+                <a onclick="loadResults()">Hasil</a>
+                <a onclick="showAddCandidate()">+ Tambah</a>
+                <a onclick="handleLogout()" style="color: red;">Logout</a>
+            </div>
+
+            <div id="vote-view">
+                <h3>Daftar Kandidat</h3>
+                <div id="candidates-list">Loading...</div>
+            </div>
+
+            <div id="results-view" class="hidden">
+                <h3>Hasil Perolehan Suara</h3>
+                <div id="results-content">Loading...</div>
+            </div>
+
+            <div id="add-candidate-view" class="hidden">
+                <h3>Tambah Kandidat Baru</h3>
+                <div class="form-group">
+                    <label>Nama Kandidat</label>
+                    <input type="text" id="cand-name">
+                </div>
+                <div class="form-group">
+                    <label>Visi Misi</label>
+                    <input type="text" id="cand-desc">
+                </div>
+                <button onclick="handleAddCandidate()">Simpan Kandidat</button>
+                <button class="secondary" onclick="loadCandidates()">Batal</button>
+            </div>
+
+            <div id="edit-candidate-view" class="hidden">
+                <h3>Edit Kandidat</h3>
+                <input type="hidden" id="edit-cand-id">
+                <div class="form-group">
+                    <label>Nama Kandidat</label>
+                    <input type="text" id="edit-cand-name">
+                </div>
+                <div class="form-group">
+                    <label>Visi Misi</label>
+                    <input type="text" id="edit-cand-desc">
+                </div>
+                <button class="btn-warning" onclick="handleUpdateCandidate()">Update Kandidat</button>
+                <button class="secondary" onclick="loadCandidates()">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
