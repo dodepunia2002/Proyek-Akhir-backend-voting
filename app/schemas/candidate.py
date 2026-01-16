@@ -1,11 +1,19 @@
 from pydantic import BaseModel
+from typing import Optional
 
-class CandidateCreate(BaseModel):
+class CandidateBase(BaseModel):
     name: str
+    description: str
 
-class CandidateResponse(BaseModel):
+class CandidateCreate(CandidateBase):
+    pass
+
+# Schema baru untuk Update (field opsional)
+class CandidateUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+class CandidateResponse(CandidateBase):
     id: int
-    name: str
-
     class Config:
         from_attributes = True

@@ -1,20 +1,27 @@
 from fastapi import FastAPI
-from app.database.database import engine
-from app.database.base import Base
-import app.models  
+from fastapi.middleware.cors import CORSMiddleware
+from app.database.database import engine, Base
+from app.routers import auth, candidate, vote
 
-from app.routers import user, candidate, vote
+# Buat tabel otomatis
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Sistem Voting Online")
 
-@app.on_event("startup")
-def startup():
-    Base.metadata.create_all(bind=engine)
 
-app.include_router(user.router)
-app.include_router(candidate.router)
-app.include_router(vote.router)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],  
+    allow_headers=["*"],
+)
+# --------------------------------------------------
+
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(candidate.router, prefix="/candidates", tags=["Candidates"])
+app.include_router(vote.router, prefix="/votes", tags=["Votes"])
 
 @app.get("/")
 def root():
-    return {"message": "API berjalan"}
+    return {"message": "Welcome to Voting System API"}
