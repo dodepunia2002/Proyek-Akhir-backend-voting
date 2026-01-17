@@ -92,40 +92,75 @@ Halaman dashboard utama di mana pengguna dapat melihat kandidat dan melakukan vo
 
 ---
 
-## 📂 Struktur Folder Proyek
+### 📂 Struktur Folder Proyek
 
-\`\`\`text
+```text
 Proyek-Akhir-backend-voting/
-├── app/                        # Source Code Backend
-│   ├── main.py                 # Entry Point Aplikasi
-│   ├── ...                     # (routers, models, schemas, dll)
-├── frontend/                   # Source Code Frontend
-│   ├── index.html              # Interface Web
-│   ├── style.css               # Styling
-│   └── script.js               # Logic JavaScript
-├── voting.db                   # File Database SQLite
-├── database_dump.sql           # Backup Data SQL
-├── erd.png                     # Gambar ERD
-├── swagger.png                 # Screenshot Swagger UI
-├── frontend.png                # Screenshot Frontend UI
-├── requirements.txt            # Library Python
-└── README.md                   # Dokumentasi
-\`\`\`
+├── .vscode/
+│   └── settings.json
+├── app/
+│   ├── core/
+│   │   ├── deps.py
+│   │   └── security.py
+│   ├── database/
+│   │   └── database.py
+│   ├── models/
+│   │   ├── candidate.py
+│   │   ├── user.py
+│   │   └── vote.py
+│   ├── repository/
+│   │   ├── candidate_repository.py
+│   │   ├── user_repository.py
+│   │   └── vote_repository.py
+│   ├── routers/
+│   │   ├── auth.py
+│   │   ├── candidate.py
+│   │   └── vote.py
+│   ├── schemas/
+│   │   ├── candidate.py
+│   │   ├── token.py
+│   │   ├── user.py
+│   │   └── vote.py
+│   ├── services/
+│   │   ├── auth_service.py
+│   │   └── vote_service.py
+│   └── main.py
+├── document/
+│   ├── DFD Sistem Voting Online.png
+│   ├── ERD SK VOTE ONLINE-KELOMPOK 2.drawio
+│   ├── Sistem Voting Online Kelompok 2.pdf
+│   ├── erd_sistem_voting_online_kelompok2.png
+│   ├── frontend.png
+│   └── swaggerui.png
+├── Frontend/
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
+├── database_dump.sql
+├── requirements.txt
+├── voting.db
+└── README.md
 
 ---
 
 ## 🚀 Cara Instalasi dan Menjalankan
 
 ### 1. Menjalankan Backend
-Buka terminal di folder proyek, lalu jalankan:
+Pastikan Anda berada di terminal dalam folder proyek, lalu jalankan perintah berikut secara berurutan:
 
-# 1. Install library
+```bash
+# 1. Buat & Aktifkan Virtual Environment (Agar tidak error saat install)
+python3 -m venv venv
+source venv/bin/activate       # Jika menggunakan Mac/Linux
+# .\venv\Scripts\activate      # Jika menggunakan Windows
+
+# 2. Install Library
 pip install -r requirements.txt
 
-# 2. Jalankan Server
+# 3. Jalankan Server
 uvicorn app.main:app --reload
-\`\`\`
-*Server akan berjalan di: http://127.0.0.1:8000*
+
+Server akan berjalan di: http://127.0.0.1:8000
 
 ### 2. Menjalankan Frontend
 * Buka folder **\`frontend/\`**.
