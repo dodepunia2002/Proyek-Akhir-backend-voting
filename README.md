@@ -196,7 +196,3 @@ uvicorn app.main:app --reload
 ---
 
 *Dokumen ini disusun untuk memenuhi kelengkapan laporan Tugas Akhir Semester.*
-
-```
-
-```
