@@ -9,7 +9,7 @@
 <body>
 
     <div class="container" id="app">
-        <h1>🗳️ E-Voting</h1>
+        <h1>🗳️ E-Voting System</h1>
         <div id="message-box"></div>
 
         <div id="login-section">
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="login-password" placeholder="******">
+                <input type="password" id="login-password">
             </div>
             <button onclick="handleLogin()">Masuk</button>
             <button class="secondary" onclick="showSection('register-section')">Daftar Akun Baru</button>
@@ -44,55 +44,89 @@
             <button class="secondary" onclick="showSection('login-section')">Kembali ke Login</button>
         </div>
 
-        <div id="dashboard-section" class="hidden">
+        <div id="polls-section" class="hidden">
             <div class="nav-links">
-                <a onclick="loadCandidates()">Vote & Kandidat</a>
-                <a onclick="loadResults()">Hasil</a>
-                <a onclick="showAddCandidate()">+ Tambah</a>
+                <span id="user-display">Halo, ...</span>
                 <a onclick="handleLogout()" style="color: red;">Logout</a>
             </div>
+            <h3>Daftar Polling Aktif</h3>
+            <button onclick="showCreatePollForm()" style="margin-bottom: 20px;">+ Buat Polling Baru</button>
+            
+            <div id="polls-list">Loading...</div>
+            
+            <div id="create-poll-form" class="hidden" style="border:1px solid #ddd; padding:15px; margin-top:10px; background:#f9f9f9;">
+                <h4>Buat Polling Baru</h4>
+                <div class="form-group">
+                    <label>Judul</label>
+                    <input type="text" id="new-poll-title">
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <input type="text" id="new-poll-desc">
+                </div>
+                <div class="form-group">
+                    <label>Batas Waktu</label>
+                    <input type="datetime-local" id="new-poll-deadline">
+                </div>
+                <button onclick="handleCreatePoll()">Simpan</button>
+                <button class="secondary" onclick="document.getElementById('create-poll-form').classList.add('hidden')">Batal</button>
+            </div>
 
-            <div id="vote-view">
-                <h3>Daftar Kandidat</h3>
-                <div id="candidates-list">Loading...</div>
+            <div id="edit-poll-form" class="hidden" style="border:1px solid #ffeba7; padding:15px; margin-top:10px; background:#fffdf5;">
+                <h4>Edit Polling</h4>
+                <input type="hidden" id="edit-poll-id"> <div class="form-group">
+                    <label>Judul</label>
+                    <input type="text" id="edit-poll-title">
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <input type="text" id="edit-poll-desc">
+                </div>
+                <div class="form-group">
+                    <label>Batas Waktu</label>
+                    <input type="datetime-local" id="edit-poll-deadline">
+                </div>
+                <button class="btn-warning" onclick="handleUpdatePoll()">Update Polling</button>
+                <button class="secondary" onclick="document.getElementById('edit-poll-form').classList.add('hidden')">Batal</button>
+            </div>
+        </div>
+
+        <div id="poll-detail-section" class="hidden">
+            <button class="secondary" onclick="loadPolls()">« Kembali ke Daftar Polling</button>
+            <h2 id="poll-title-display">Judul Polling</h2>
+            <p id="poll-desc-display">Deskripsi</p>
+            <p style="color:red">Deadline: <span id="poll-deadline-display"></span></p>
+
+            <div class="nav-links">
+                <a onclick="loadCandidates(currentPollId)">Kandidat & Vote</a>
+                <a onclick="loadResults(currentPollId)">Lihat Hasil</a>
+                <a onclick="showAddCandidate()">+ Tambah Kandidat</a>
+            </div>
+
+            <div id="candidates-view">
+                <div id="candidates-list"></div>
             </div>
 
             <div id="results-view" class="hidden">
-                <h3>Hasil Perolehan Suara</h3>
-                <div id="results-content">Loading...</div>
+                <div id="results-content"></div>
             </div>
 
             <div id="add-candidate-view" class="hidden">
-                <h3>Tambah Kandidat Baru</h3>
+                <h3>Tambah Kandidat</h3>
                 <div class="form-group">
-                    <label>Nama Kandidat</label>
+                    <label>Nama</label>
                     <input type="text" id="cand-name">
                 </div>
                 <div class="form-group">
                     <label>Visi Misi</label>
                     <input type="text" id="cand-desc">
                 </div>
-                <button onclick="handleAddCandidate()">Simpan Kandidat</button>
-                <button class="secondary" onclick="loadCandidates()">Batal</button>
-            </div>
-
-            <div id="edit-candidate-view" class="hidden">
-                <h3>Edit Kandidat</h3>
-                <input type="hidden" id="edit-cand-id">
-                <div class="form-group">
-                    <label>Nama Kandidat</label>
-                    <input type="text" id="edit-cand-name">
-                </div>
-                <div class="form-group">
-                    <label>Visi Misi</label>
-                    <input type="text" id="edit-cand-desc">
-                </div>
-                <button class="btn-warning" onclick="handleUpdateCandidate()">Update Kandidat</button>
-                <button class="secondary" onclick="loadCandidates()">Batal</button>
+                <button onclick="handleAddCandidate()">Simpan</button>
+                <button class="secondary" onclick="document.getElementById('add-candidate-view').classList.add('hidden')">Batal</button>
             </div>
         </div>
-    </div>
 
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

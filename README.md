@@ -1,186 +1,202 @@
-# 🗳️ SISTEM VOTING ONLINE - KELOMPOK 2
+# SISTEM VOTING ONLINE (E-VOTING)
 
-## 📖 Deskripsi Singkat
-Proyek ini adalah aplikasi **Sistem Voting Online (Fullstack)** yang dibangun untuk memenuhi Tugas Proyek Akhir Mata Kuliah Backend Development. Aplikasi ini menggunakan **FastAPI** (Python) untuk Backend dan **HTML/JS Native** untuk Frontend.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688?style=flat-square&logo=fastapi&logoColor=white)
+![SQLite](https://img.shields.io/badge/Database-SQLite-07405E?style=flat-square&logo=sqlite&logoColor=white)
 
-Sistem ini menjamin keamanan dan keadilan voting dengan prinsip **"Satu Pengguna Satu Suara"** (*One Man One Vote*) menggunakan autentikasi berbasis Token (JWT).
+## Deskripsi Singkat
+Proyek ini adalah aplikasi **Sistem Voting Online (Fullstack)** yang dikembangkan untuk memenuhi Tugas Proyek Akhir Mata Kuliah *Backend Web Development*. Aplikasi ini dirancang untuk memfasilitasi proses pemungutan suara digital yang aman, transparan, dan *real-time*.
 
----
-
-## 👥 Daftar Anggota Tim
-
-| No | Nama | NIM | Username GitHub | Peran/Tugas |
-|:--:|:-----|:---:|:----------------|:------------|
-| 1 | **Anak Agung Made Agung D.** | 230030447 | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) | 🏗️ Setup Project, FastAPI, & DB Config |
-| 2 | **Ida Bagus Gde Yoga Pramana** | 240030457 | [Yoga240030457](https://github.com/Yoga240030457) | 🗄️ Model Database & Schema |
-| 3 | **Zacky Cahya Afrizai** | 240030268 | [ZCASTUDIO](https://github.com/ZCASTUDIO) | ⚙️ Repository (CRUD Database) |
-| 4 | **I Dewa Gede Punia Atmaja** | 220030750 | [dodepunia2002](https://github.com/dodepunia2002) | 🌐 Router API, Endpoint, & Frontend |
-| 5 | **I Made Anom Wibawa** | 240030465 | [AnomWibawa](https://github.com/AnomWibawa) | 📝 Dokumentasi Sistem & README |
+Sistem ini memfasilitasi dua jenis pengguna (Admin dan User) untuk berpartisipasi dalam pemilihan umum atau survei. Fitur utamanya mencakup manajemen polling yang dinamis, validasi "One Man One Vote", batasan waktu (deadline) otomatis, dan transparansi hasil voting yang terjaga hingga pemilihan berakhir.
 
 ---
 
-## 🛠️ Lingkungan Pengembangan
+## Daftar Anggota
+Berikut adalah tim pengembang **Kelompok 2** beserta peran dan tugas masing-masing:
 
-Teknologi yang digunakan dalam pengembangan:
-* **Backend:** Python 3.11+, FastAPI, Uvicorn, SQLAlchemy.
-* **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API).
-* **Database:** SQLite.
-* **Keamanan:** OAuth2 (JWT Token), Bcrypt Hashing.
-* **Tools:** Visual Studio Code, Git/GitHub, Swagger UI.
-
----
-
-## 🔄 Proses Bisnis
-
-1.  **Registrasi & Login:** User mendaftar dan login untuk mendapatkan Token Akses.
-2.  **Manajemen Kandidat (Admin):**
-    * Menambah, Mengedit, dan Menghapus Kandidat.
-    * Melihat daftar kandidat aktif.
-3.  **Proses Voting:**
-    * Sistem memvalidasi identitas user via Token.
-    * Sistem mengecek apakah user sudah pernah memilih (Cegah *double-vote*).
-    * Jika valid, suara disimpan.
-4.  **Hasil Real-time:** Dashboard menampilkan rekapitulasi suara secara langsung.
+| No | Nama Lengkap | NIM | Username GitHub | Peran / Tugas |
+|:--:|:----------------------------------|:-----------:|:-----------------------------------|:-----------------------------------|
+| 1 | **Anak Agung Made Agung Dananjaya** | 230030447 | [gungdanan2005-maker](https://github.com/gungdanan2005-maker) | **Project Manager & Setup:** Konfigurasi awal FastAPI dan struktur proyek. |
+| 2 | **Ida Bagus Gde Yoga Pramana** | 240030457 | [Yoga240030457](https://github.com/Yoga240030457) | **Database Designer:** Perancangan skema database dan relasi antar tabel (ERD). |
+| 3 | **Zacky Cahya Afrizai** | 240030268 | [ZCASTUDIO](https://github.com/ZCASTUDIO) | **Repository Engineer:** Implementasi logika CRUD database dan query. |
+| 4 | **I Dewa Gede Punia Atmaja** | 220030750 | [dodepunia2002](https://github.com/dodepunia2002) | **Auth & Integration:** Layanan autentikasi (JWT) dan integrasi Backend ke Frontend. |
+| 5 | **I Made Anom Wibawa** | 240030465 | [AnomWibawa](https://github.com/AnomWibawa) | **QA & Documentation:** Pengujian fitur dan penyusunan laporan/dokumentasi. |
 
 ---
 
-## 📊 ERD (Entity Relationship Diagram)
+## Lingkungan Pengembangan
+Aplikasi ini dikembangkan menggunakan alat dan teknologi berikut:
 
-Desain database menggunakan relasi *One-to-Many* antara Users/Candidates dengan Votes.
-
-![alt text](document/erd_sistem_voting_online_kelompok2.png)
-
----
-
-## 📸 Tampilan Aplikasi
-
-Berikut adalah tangkapan layar antarmuka aplikasi yang telah dikembangkan.
-
-### 1. Swagger UI (Dokumentasi API Backend)
-Antarmuka interaktif untuk menguji endpoint API secara langsung.
-![!\[Swagger UI\](swagger.png)](document/swaggerui.png)
-
-### 2. Frontend (Antarmuka Pengguna Web)
-Halaman dashboard utama di mana pengguna dapat melihat kandidat dan melakukan voting.
-![!\[Frontend UI\](frontend.png)](document/frontend.png)
+* **Bahasa Pemrograman:** Python 3.11+
+* **Framework Backend:** FastAPI (Kinerja tinggi, validasi data otomatis)
+* **Database:** SQLite (Relasional, file-based)
+* **ORM (Object Relational Mapping):** SQLAlchemy
+* **Autentikasi & Keamanan:**
+    * `Passlib[bcrypt]`: Hashing password satu arah.
+    * `PyJWT`: Tokenisasi sesi login (JSON Web Token).
+* **Server:** Uvicorn (ASGI Server)
+* **Frontend:** HTML5, CSS3, JavaScript (Native/Vanilla)
+* **Tools:** Visual Studio Code, Git, GitHub, Postman / Swagger UI.
 
 ---
 
-## 🗂️ Struktur Tabel Database
+## Proses Bisnis
+Alur kerja utama aplikasi ini berjalan sebagai berikut:
 
-### 1. Tabel \`users\`
-| Kolom | Tipe | Keterangan |
-|-------|------|------------|
-| \`id\` | PK | ID Unik User |
-| \`email\` | String | Email Login (Unique) |
-| \`username\` | String | Nama User |
-| \`password\` | String | Password Hash |
-
-### 2. Tabel \`candidates\`
-| Kolom | Tipe | Keterangan |
-|-------|------|------------|
-| \`id\` | PK | ID Unik Kandidat |
-| \`name\` | String | Nama Kandidat |
-| \`description\` | Text | Visi Misi |
-
-### 3. Tabel \`votes\`
-| Kolom | Tipe | Keterangan |
-|-------|------|------------|
-| \`id\` | PK | ID Transaksi Suara |
-| \`user_id\` | FK | ID Pemilih (Unique Constraint) |
-| \`candidate_id\` | FK | ID Kandidat yang dipilih |
+1.  **Registrasi & Autentikasi:**
+    Pengguna (Pemilih) harus mendaftar akun terlebih dahulu. Setelah terdaftar, pengguna melakukan login untuk mendapatkan Token Akses (JWT). Tanpa token ini, pengguna tidak dapat mengakses fitur voting.
+2.  **Pembuatan Polling (Admin/User):**
+    Pengguna dapat membuat topik polling baru. Saat membuat, pengguna wajib menyertakan Judul, Deskripsi, dan **Batas Waktu (Deadline)** kapan voting ditutup.
+3.  **Manajemen Kandidat:**
+    Setelah polling dibuat, pemilik polling menambahkan opsi kandidat yang akan dipilih.
+4.  **Pelaksanaan Voting:**
+    * Pengguna melihat daftar polling yang aktif.
+    * Pengguna memilih salah satu kandidat.
+    * **Validasi Sistem:** Sistem memeriksa apakah pengguna *sudah pernah memilih* di polling tersebut. Jika sudah, vote ditolak (Prinsip *One Man One Vote*). Sistem juga memeriksa apakah waktu saat ini belum melewati deadline.
+5.  **Hasil & Rekapitulasi:**
+    * Jika waktu voting masih berjalan: Hasil voting **disembunyikan** untuk menjaga kerahasiaan.
+    * Jika waktu voting berakhir (Deadline lewat): Hasil perolehan suara ditampilkan secara terbuka dan *real-time*.
 
 ---
 
-### 📂 Struktur Folder Proyek
+## ERD (Entity Relationship Diagram)
+Model data aplikasi dirancang untuk menangani relasi antara Pengguna, Polling, Kandidat, dan Suara.
 
-```text
+![ERD sistem Voting](document/erd_sistem_voting_online_kelompok2.png)
+
+*Gambar: Diagram Relasi Entitas Sistem Voting Online*
+
+---
+
+## Struktur Database
+Database SQLite terdiri dari 4 tabel utama dengan rincian sebagai berikut:
+
+### 1. Tabel `users`
+Menyimpan informasi akun pengguna.
+* **id** (Primary Key, Int): ID unik pengguna.
+* **email** (String, Unique): Alamat email untuk login.
+* **username** (String): Nama tampilan pengguna.
+* **password** (String): Password yang sudah di-hash (bukan plain text).
+* **role** (String): Peran akun ('admin' atau 'user').
+* **is_active** (Bool): Status aktif akun.
+
+### 2. Tabel `polls`
+Menyimpan topik atau sesi voting.
+* **id** (Primary Key, Int): ID unik polling.
+* **title** (String): Judul polling.
+* **description** (String): Deskripsi singkat.
+* **deadline** (DateTime): Waktu kapan voting ditutup.
+* **creator_id** (Foreign Key -> users.id): ID pembuat polling.
+
+### 3. Tabel `candidates`
+Menyimpan opsi pilihan dalam sebuah polling.
+* **id** (Primary Key, Int): ID unik kandidat.
+* **name** (String): Nama kandidat.
+* **description** (String): Visi misi atau keterangan kandidat.
+* **poll_id** (Foreign Key -> polls.id): ID polling tempat kandidat berada.
+
+### 4. Tabel `votes`
+Tabel transaksi untuk merekam suara dan mencegah pemilihan ganda.
+* **id** (Primary Key, Int): ID unik suara.
+* **user_id** (Foreign Key -> users.id): Siapa yang memilih.
+* **candidate_id** (Foreign Key -> candidates.id): Siapa yang dipilih.
+* **poll_id** (Foreign Key -> polls.id): Di polling mana suara diberikan.
+
+---
+
+## Hasil Pengembangan
+Fitur-fitur utama yang berhasil diimplementasikan dalam proyek ini:
+
+1.  **Sistem Autentikasi JWT:**
+    Implementasi login aman dengan token yang memiliki masa berlaku (expire time). Melindungi endpoint API dari akses tidak sah.
+2.  **Manajemen Polling Lengkap (CRUD):**
+    Kemampuan untuk Membuat (Create), Membaca (Read), Mengedit (Update), dan Menghapus (Delete) polling. Dilengkapi logika otorisasi dimana hanya pemilik polling atau Admin yang bisa mengedit/menghapus.
+3.  **Kontrol Batas Waktu (Time-Limit):**
+    Logika backend yang otomatis menolak suara baru jika waktu server sudah melewati `deadline` polling.
+4.  **Validasi Suara Unik:**
+    Penerapan constraint logika di database dan service layer untuk memastikan satu User ID hanya muncul satu kali per Poll ID di tabel Votes.
+5.  **Dashboard Frontend Terintegrasi:**
+    Antarmuka web responsif yang terhubung ke API, memungkinkan user melakukan semua aksi (Login, Buat, Vote, Edit) tanpa mengetik kode.
+
+---
+
+## Struktur Folder
+Proyek disusun menggunakan arsitektur *Layered* (Router-Service-Repository) untuk memisahkan tanggung jawab kode.
+
+```plaintext
 Proyek-Akhir-backend-voting/
-├── .vscode/
-│   └── settings.json
 ├── app/
-│   ├── core/
-│   │   ├── deps.py
-│   │   └── security.py
-│   ├── database/
-│   │   └── database.py
-│   ├── models/
-│   │   ├── candidate.py
-│   │   ├── user.py
-│   │   └── vote.py
-│   ├── repository/
-│   │   ├── candidate_repository.py
-│   │   ├── user_repository.py
-│   │   └── vote_repository.py
-│   ├── routers/
-│   │   ├── auth.py
-│   │   ├── candidate.py
-│   │   └── vote.py
-│   ├── schemas/
-│   │   ├── candidate.py
-│   │   ├── token.py
-│   │   ├── user.py
-│   │   └── vote.py
-│   ├── services/
-│   │   ├── auth_service.py
-│   │   └── vote_service.py
-│   └── main.py
-├── document/
-│   ├── DFD Sistem Voting Online.png
-│   ├── ERD SK VOTE ONLINE-KELOMPOK 2.drawio
-│   ├── Sistem Voting Online Kelompok 2.pdf
-│   ├── erd_sistem_voting_online_kelompok2.png
-│   ├── frontend.png
-│   └── swaggerui.png
-├── Frontend/
-│   ├── index.html
-│   ├── script.js
-│   └── style.css
-├── database_dump.sql
-├── requirements.txt
-├── voting.db
-└── README.md
+│   ├── core/           # Konfigurasi inti (Security, Hashing, Config)
+│   ├── database/       # Setup koneksi database SQLite
+│   ├── models/         # Definisi Struktur Tabel (SQLAlchemy Models)
+│   ├── routers/        # Endpoint API / Controller (Menangani Request HTTP)
+│   ├── repository/     # Akses Data (Query langsung ke Database)
+│   ├── schemas/        # Validasi Data Input/Output (Pydantic Models)
+│   ├── services/       # Logika Bisnis Kompleks (Business Logic Layer)
+│   └── main.py         # Entry Point Aplikasi (Inisialisasi FastAPI)
+├── Frontend/           # File Antarmuka Pengguna (HTML, CSS, JS)
+├── document/           # Dokumen pelengkap (Laporan, ERD, DFD)
+├── requirements.txt    # Daftar pustaka/library Python yang digunakan
+├── voting.db           # File Database (Dibuat otomatis saat dijalankan)
+└── README.md           # Dokumentasi Proyek ini
+
+```
 
 ---
 
-## 🚀 Cara Instalasi dan Menjalankan
+## Cara Instalasi dan Menjalankan Aplikasi
 
-### 1. Menjalankan Backend
-Pastikan Anda berada di terminal dalam folder proyek, lalu jalankan perintah berikut secara berurutan:
+Ikuti langkah-langkah berikut untuk menjalankan proyek di komputer lokal:
+
+### 1. Persiapan Environment
+
+Pastikan Python sudah terinstal. Buka terminal di dalam folder proyek, lalu jalankan:
+
+**Untuk Windows:**
 
 ```bash
-# 1. Buat & Aktifkan Virtual Environment (Agar tidak error saat install)
-python3 -m venv venv
-source venv/bin/activate       # Jika menggunakan Mac/Linux
-# .\venv\Scripts\activate      # Jika menggunakan Windows
+python -m venv venv
+venv\Scripts\activate
 
-# 2. Install Library
+```
+
+**Untuk Mac/Linux:**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+
+```
+
+### 2. Instalasi Dependensi
+
+Install semua library yang dibutuhkan sistem:
+
+```bash
 pip install -r requirements.txt
 
-# 3. Jalankan Server
+```
+
+### 3. Menjalankan Server
+
+Jalankan server backend menggunakan Uvicorn:
+
+```bash
 uvicorn app.main:app --reload
 
-Server akan berjalan di: http://127.0.0.1:8000
+```
 
-### 2. Menjalankan Frontend
-* Buka folder **\`frontend/\`**.
-* Klik dua kali file **\`index.html\`** (atau *drag & drop* ke browser).
+*Server akan berjalan di alamat: `http://127.0.0.1:8000*`
 
----
+### 4. Mengakses Aplikasi
 
-## 🧪 Akun Demo (Data Dummy)
-
-Gunakan akun berikut untuk mencoba aplikasi (semua password sama).
-
-🔑 **Password:** \`123456\`
-
-| Pemilik Akun | Email Login |
-|--------------|-------------|
-| Agung D. | \`agung@example.com\` |
-| Yoga P. | \`yoga@example.com\` |
-| Zacky C. | \`zacky@example.com\` |
-| Dode Punia | \`dodepunia@example.com\` |
-| Anom W. | \`anom@example.com\` |
+* **Web Dashboard:** Buka file `Frontend/index.html` di browser Anda (Chrome/Edge/Safari).
+* **Dokumentasi API (Swagger UI):** Akses `http://127.0.0.1:8000/docs` untuk melihat dan menguji endpoint API secara interaktif.
 
 ---
 
+*Dokumen ini disusun untuk memenuhi kelengkapan laporan Tugas Akhir Semester.*
+
+```
+
+```

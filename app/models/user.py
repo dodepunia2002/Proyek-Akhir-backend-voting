@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.orm import relationship # Tambah ini
 from app.database.database import Base
 
 class User(Base):
@@ -8,3 +9,9 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     password = Column(String)
     is_active = Column(Boolean, default=True)
+    
+
+    role = Column(String, default="user") 
+
+
+    polls = relationship("Poll", back_populates="creator")

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 
 class VoteCreate(BaseModel):
+    poll_id: int
     candidate_id: int
 
 class VoteResult(BaseModel):
